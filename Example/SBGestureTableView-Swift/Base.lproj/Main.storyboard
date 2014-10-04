@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="rS3-R9-Ivy">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <scenes>
+        <!--Master-->
+        <scene sceneID="cUi-kZ-frf">
+            <objects>
+                <navigationController title="Master" id="rS3-R9-Ivy" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="yXu-0R-QUA">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="awW-TB-yjR" kind="relationship" relationship="rootViewController" id="ydf-wF-ymI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eq9-QA-ai8" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-148" y="64"/>
+        </scene>
+        <!--Master-->
+        <scene sceneID="BfS-6Z-Qkm">
+            <objects>
+                <viewController id="awW-TB-yjR" customClass="MasterViewController" customModule="SBGestureTableView_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6o3-9A-DsI"/>
+                        <viewControllerLayoutGuide type="bottom" id="df0-Xx-Rtv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="CZO-x3-fRK">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="59" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="sZp-BS-CmM" customClass="SBGestureTableView" customModule="SBGestureTableView_Swift" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="60" id="8yt-bw-PJl" customClass="SBGestureTableViewCell" customModule="SBGestureTableView_Swift" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8yt-bw-PJl" id="XTl-Nh-5jd">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Ah7-4n-0Wa" kind="show" identifier="showDetail" id="g9v-m0-tqW"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="awW-TB-yjR" id="Rec-qc-wOk"/>
+                                    <outlet property="delegate" destination="awW-TB-yjR" id="ioK-sr-vOu"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="sZp-BS-CmM" secondAttribute="trailing" id="6eT-eC-TOh"/>
+                            <constraint firstItem="sZp-BS-CmM" firstAttribute="leading" secondItem="CZO-x3-fRK" secondAttribute="leading" id="Zhh-ir-tes"/>
+                            <constraint firstItem="sZp-BS-CmM" firstAttribute="top" secondItem="CZO-x3-fRK" secondAttribute="top" id="nY3-Qk-2JI"/>
+                            <constraint firstItem="df0-Xx-Rtv" firstAttribute="top" secondItem="sZp-BS-CmM" secondAttribute="bottom" id="vaq-eN-2pw"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Master" id="ywx-Jk-sHr"/>
+                    <connections>
+                        <outlet property="tableView" destination="sZp-BS-CmM" id="gGW-TM-8E9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y1i-wW-MtD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="589" y="64"/>
+        </scene>
+        <!--Detail-->
+        <scene sceneID="Cn3-H9-jdl">
+            <objects>
+                <viewController title="Detail" id="Ah7-4n-0Wa" customClass="DetailViewController" customModule="SBGestureTableView_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cIm-e0-J51"/>
+                        <viewControllerLayoutGuide type="bottom" id="a0L-h9-sNL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="MMQ-IT-qOo">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Detail view content goes here" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Lei-5M-9Gs">
+                                <rect key="frame" x="20" y="292" width="560" height="17"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" size="system"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Lei-5M-9Gs" firstAttribute="leading" secondItem="MMQ-IT-qOo" secondAttribute="leading" constant="20" symbolic="YES" id="62x-JV-TTJ"/>
+                            <constraint firstItem="Lei-5M-9Gs" firstAttribute="centerY" secondItem="MMQ-IT-qOo" secondAttribute="centerY" id="JzS-HC-Rnl"/>
+                            <constraint firstAttribute="trailing" secondItem="Lei-5M-9Gs" secondAttribute="trailing" constant="20" symbolic="YES" id="pXB-RP-Zz6"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Detail" id="cra-N8-TIN"/>
+                    <connections>
+                        <outlet property="detailDescriptionLabel" destination="Lei-5M-9Gs" id="sCT-F7-F6f"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lrm-kH-fPn" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1343" y="64"/>
+        </scene>
+    </scenes>
+</document>

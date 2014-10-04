@@ -1,0 +1,519 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B5362A8C19E0672E00999C74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5362A8B19E0672E00999C74 /* AppDelegate.swift */; };
+		B5362A8E19E0672E00999C74 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5362A8D19E0672E00999C74 /* MasterViewController.swift */; };
+		B5362A9019E0672E00999C74 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5362A8F19E0672E00999C74 /* DetailViewController.swift */; };
+		B5362A9319E0672E00999C74 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5362A9119E0672E00999C74 /* Main.storyboard */; };
+		B5362A9519E0672E00999C74 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5362A9419E0672E00999C74 /* Images.xcassets */; };
+		B5362A9819E0672E00999C74 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5362A9619E0672E00999C74 /* LaunchScreen.xib */; };
+		B5362AA419E0672E00999C74 /* SBGestureTableView_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5362AA319E0672E00999C74 /* SBGestureTableView_SwiftTests.swift */; };
+		B5362AB219E0675200999C74 /* SBGestureTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5362AAE19E0675200999C74 /* SBGestureTableView.swift */; };
+		B5362AB319E0675200999C74 /* SBGestureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5362AAF19E0675200999C74 /* SBGestureTableViewCell.swift */; };
+		B5362AB419E0675200999C74 /* SBGestureTableViewCellAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5362AB019E0675200999C74 /* SBGestureTableViewCellAction.swift */; };
+		B5362AB519E0675200999C74 /* SBGestureTableViewCellSideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5362AB119E0675200999C74 /* SBGestureTableViewCellSideView.swift */; };
+		B5362AC719E0752A00999C74 /* FAKFontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = B5362AB919E0752A00999C74 /* FAKFontAwesome.m */; };
+		B5362AC819E0752A00999C74 /* FAKFoundationIcons.m in Sources */ = {isa = PBXBuildFile; fileRef = B5362ABB19E0752A00999C74 /* FAKFoundationIcons.m */; };
+		B5362AC919E0752A00999C74 /* FAKIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = B5362ABD19E0752A00999C74 /* FAKIcon.m */; };
+		B5362ACA19E0752A00999C74 /* FAKIonIcons.m in Sources */ = {isa = PBXBuildFile; fileRef = B5362ABF19E0752A00999C74 /* FAKIonIcons.m */; };
+		B5362ACB19E0752A00999C74 /* FAKZocial.m in Sources */ = {isa = PBXBuildFile; fileRef = B5362AC119E0752A00999C74 /* FAKZocial.m */; };
+		B5362ACC19E0752A00999C74 /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = B5362AC219E0752A00999C74 /* FontAwesome.otf */; };
+		B5362ACD19E0752A00999C74 /* foundation-icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5362AC419E0752A00999C74 /* foundation-icons.ttf */; };
+		B5362ACE19E0752A00999C74 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5362AC519E0752A00999C74 /* ionicons.ttf */; };
+		B5362ACF19E0752A00999C74 /* zocial-regular-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5362AC619E0752A00999C74 /* zocial-regular-webfont.ttf */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B5362A9E19E0672E00999C74 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B5362A7E19E0672E00999C74 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B5362A8519E0672E00999C74;
+			remoteInfo = "SBGestureTableView-Swift";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B5362A8619E0672E00999C74 /* SBGestureTableView-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SBGestureTableView-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5362A8A19E0672E00999C74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5362A8B19E0672E00999C74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B5362A8D19E0672E00999C74 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
+		B5362A8F19E0672E00999C74 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		B5362A9219E0672E00999C74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B5362A9419E0672E00999C74 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		B5362A9719E0672E00999C74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		B5362A9D19E0672E00999C74 /* SBGestureTableView-SwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SBGestureTableView-SwiftTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5362AA219E0672E00999C74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5362AA319E0672E00999C74 /* SBGestureTableView_SwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBGestureTableView_SwiftTests.swift; sourceTree = "<group>"; };
+		B5362AAE19E0675200999C74 /* SBGestureTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBGestureTableView.swift; sourceTree = "<group>"; };
+		B5362AAF19E0675200999C74 /* SBGestureTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBGestureTableViewCell.swift; sourceTree = "<group>"; };
+		B5362AB019E0675200999C74 /* SBGestureTableViewCellAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBGestureTableViewCellAction.swift; sourceTree = "<group>"; };
+		B5362AB119E0675200999C74 /* SBGestureTableViewCellSideView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBGestureTableViewCellSideView.swift; sourceTree = "<group>"; };
+		B5362AB819E0752A00999C74 /* FAKFontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAKFontAwesome.h; sourceTree = "<group>"; };
+		B5362AB919E0752A00999C74 /* FAKFontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FAKFontAwesome.m; sourceTree = "<group>"; };
+		B5362ABA19E0752A00999C74 /* FAKFoundationIcons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAKFoundationIcons.h; sourceTree = "<group>"; };
+		B5362ABB19E0752A00999C74 /* FAKFoundationIcons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FAKFoundationIcons.m; sourceTree = "<group>"; };
+		B5362ABC19E0752A00999C74 /* FAKIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAKIcon.h; sourceTree = "<group>"; };
+		B5362ABD19E0752A00999C74 /* FAKIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FAKIcon.m; sourceTree = "<group>"; };
+		B5362ABE19E0752A00999C74 /* FAKIonIcons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAKIonIcons.h; sourceTree = "<group>"; };
+		B5362ABF19E0752A00999C74 /* FAKIonIcons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FAKIonIcons.m; sourceTree = "<group>"; };
+		B5362AC019E0752A00999C74 /* FAKZocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAKZocial.h; sourceTree = "<group>"; };
+		B5362AC119E0752A00999C74 /* FAKZocial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FAKZocial.m; sourceTree = "<group>"; };
+		B5362AC219E0752A00999C74 /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.otf; sourceTree = "<group>"; };
+		B5362AC319E0752A00999C74 /* FontAwesomeKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontAwesomeKit.h; sourceTree = "<group>"; };
+		B5362AC419E0752A00999C74 /* foundation-icons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "foundation-icons.ttf"; sourceTree = "<group>"; };
+		B5362AC519E0752A00999C74 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ionicons.ttf; sourceTree = "<group>"; };
+		B5362AC619E0752A00999C74 /* zocial-regular-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "zocial-regular-webfont.ttf"; sourceTree = "<group>"; };
+		B5362AD019E0767F00999C74 /* SBGestureTableView-Swift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SBGestureTableView-Swift-Bridging-Header.h"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B5362A8319E0672E00999C74 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5362A9A19E0672E00999C74 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B5362A7D19E0672E00999C74 = {
+			isa = PBXGroup;
+			children = (
+				B5362A8819E0672E00999C74 /* SBGestureTableView-Swift */,
+				B5362AA019E0672E00999C74 /* SBGestureTableView-SwiftTests */,
+				B5362A8719E0672E00999C74 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B5362A8719E0672E00999C74 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B5362A8619E0672E00999C74 /* SBGestureTableView-Swift.app */,
+				B5362A9D19E0672E00999C74 /* SBGestureTableView-SwiftTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B5362A8819E0672E00999C74 /* SBGestureTableView-Swift */ = {
+			isa = PBXGroup;
+			children = (
+				B5362AB619E0752A00999C74 /* lib */,
+				B5362AAD19E0675200999C74 /* SBGestureTableView */,
+				B5362A8B19E0672E00999C74 /* AppDelegate.swift */,
+				B5362A8D19E0672E00999C74 /* MasterViewController.swift */,
+				B5362A8F19E0672E00999C74 /* DetailViewController.swift */,
+				B5362A9119E0672E00999C74 /* Main.storyboard */,
+				B5362A9419E0672E00999C74 /* Images.xcassets */,
+				B5362A9619E0672E00999C74 /* LaunchScreen.xib */,
+				B5362A8919E0672E00999C74 /* Supporting Files */,
+			);
+			path = "SBGestureTableView-Swift";
+			sourceTree = "<group>";
+		};
+		B5362A8919E0672E00999C74 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B5362A8A19E0672E00999C74 /* Info.plist */,
+				B5362AD019E0767F00999C74 /* SBGestureTableView-Swift-Bridging-Header.h */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B5362AA019E0672E00999C74 /* SBGestureTableView-SwiftTests */ = {
+			isa = PBXGroup;
+			children = (
+				B5362AA319E0672E00999C74 /* SBGestureTableView_SwiftTests.swift */,
+				B5362AA119E0672E00999C74 /* Supporting Files */,
+			);
+			path = "SBGestureTableView-SwiftTests";
+			sourceTree = "<group>";
+		};
+		B5362AA119E0672E00999C74 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B5362AA219E0672E00999C74 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B5362AAD19E0675200999C74 /* SBGestureTableView */ = {
+			isa = PBXGroup;
+			children = (
+				B5362AAE19E0675200999C74 /* SBGestureTableView.swift */,
+				B5362AAF19E0675200999C74 /* SBGestureTableViewCell.swift */,
+				B5362AB019E0675200999C74 /* SBGestureTableViewCellAction.swift */,
+				B5362AB119E0675200999C74 /* SBGestureTableViewCellSideView.swift */,
+			);
+			name = SBGestureTableView;
+			path = ../../SBGestureTableView;
+			sourceTree = "<group>";
+		};
+		B5362AB619E0752A00999C74 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				B5362AB719E0752A00999C74 /* FontAwesomeKit */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		B5362AB719E0752A00999C74 /* FontAwesomeKit */ = {
+			isa = PBXGroup;
+			children = (
+				B5362AB819E0752A00999C74 /* FAKFontAwesome.h */,
+				B5362AB919E0752A00999C74 /* FAKFontAwesome.m */,
+				B5362ABA19E0752A00999C74 /* FAKFoundationIcons.h */,
+				B5362ABB19E0752A00999C74 /* FAKFoundationIcons.m */,
+				B5362ABC19E0752A00999C74 /* FAKIcon.h */,
+				B5362ABD19E0752A00999C74 /* FAKIcon.m */,
+				B5362ABE19E0752A00999C74 /* FAKIonIcons.h */,
+				B5362ABF19E0752A00999C74 /* FAKIonIcons.m */,
+				B5362AC019E0752A00999C74 /* FAKZocial.h */,
+				B5362AC119E0752A00999C74 /* FAKZocial.m */,
+				B5362AC219E0752A00999C74 /* FontAwesome.otf */,
+				B5362AC319E0752A00999C74 /* FontAwesomeKit.h */,
+				B5362AC419E0752A00999C74 /* foundation-icons.ttf */,
+				B5362AC519E0752A00999C74 /* ionicons.ttf */,
+				B5362AC619E0752A00999C74 /* zocial-regular-webfont.ttf */,
+			);
+			path = FontAwesomeKit;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B5362A8519E0672E00999C74 /* SBGestureTableView-Swift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B5362AA719E0672E00999C74 /* Build configuration list for PBXNativeTarget "SBGestureTableView-Swift" */;
+			buildPhases = (
+				B5362A8219E0672E00999C74 /* Sources */,
+				B5362A8319E0672E00999C74 /* Frameworks */,
+				B5362A8419E0672E00999C74 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SBGestureTableView-Swift";
+			productName = "SBGestureTableView-Swift";
+			productReference = B5362A8619E0672E00999C74 /* SBGestureTableView-Swift.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B5362A9C19E0672E00999C74 /* SBGestureTableView-SwiftTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B5362AAA19E0672E00999C74 /* Build configuration list for PBXNativeTarget "SBGestureTableView-SwiftTests" */;
+			buildPhases = (
+				B5362A9919E0672E00999C74 /* Sources */,
+				B5362A9A19E0672E00999C74 /* Frameworks */,
+				B5362A9B19E0672E00999C74 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B5362A9F19E0672E00999C74 /* PBXTargetDependency */,
+			);
+			name = "SBGestureTableView-SwiftTests";
+			productName = "SBGestureTableView-SwiftTests";
+			productReference = B5362A9D19E0672E00999C74 /* SBGestureTableView-SwiftTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B5362A7E19E0672E00999C74 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = Stickbuilt;
+				TargetAttributes = {
+					B5362A8519E0672E00999C74 = {
+						CreatedOnToolsVersion = 6.0.1;
+					};
+					B5362A9C19E0672E00999C74 = {
+						CreatedOnToolsVersion = 6.0.1;
+						TestTargetID = B5362A8519E0672E00999C74;
+					};
+				};
+			};
+			buildConfigurationList = B5362A8119E0672E00999C74 /* Build configuration list for PBXProject "SBGestureTableView-Swift" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B5362A7D19E0672E00999C74;
+			productRefGroup = B5362A8719E0672E00999C74 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B5362A8519E0672E00999C74 /* SBGestureTableView-Swift */,
+				B5362A9C19E0672E00999C74 /* SBGestureTableView-SwiftTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B5362A8419E0672E00999C74 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5362ACE19E0752A00999C74 /* ionicons.ttf in Resources */,
+				B5362A9319E0672E00999C74 /* Main.storyboard in Resources */,
+				B5362A9819E0672E00999C74 /* LaunchScreen.xib in Resources */,
+				B5362ACF19E0752A00999C74 /* zocial-regular-webfont.ttf in Resources */,
+				B5362ACC19E0752A00999C74 /* FontAwesome.otf in Resources */,
+				B5362A9519E0672E00999C74 /* Images.xcassets in Resources */,
+				B5362ACD19E0752A00999C74 /* foundation-icons.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5362A9B19E0672E00999C74 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B5362A8219E0672E00999C74 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5362AB319E0675200999C74 /* SBGestureTableViewCell.swift in Sources */,
+				B5362AC919E0752A00999C74 /* FAKIcon.m in Sources */,
+				B5362ACB19E0752A00999C74 /* FAKZocial.m in Sources */,
+				B5362A9019E0672E00999C74 /* DetailViewController.swift in Sources */,
+				B5362AB419E0675200999C74 /* SBGestureTableViewCellAction.swift in Sources */,
+				B5362A8E19E0672E00999C74 /* MasterViewController.swift in Sources */,
+				B5362AB519E0675200999C74 /* SBGestureTableViewCellSideView.swift in Sources */,
+				B5362AC719E0752A00999C74 /* FAKFontAwesome.m in Sources */,
+				B5362AB219E0675200999C74 /* SBGestureTableView.swift in Sources */,
+				B5362ACA19E0752A00999C74 /* FAKIonIcons.m in Sources */,
+				B5362A8C19E0672E00999C74 /* AppDelegate.swift in Sources */,
+				B5362AC819E0752A00999C74 /* FAKFoundationIcons.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5362A9919E0672E00999C74 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5362AA419E0672E00999C74 /* SBGestureTableView_SwiftTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B5362A9F19E0672E00999C74 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B5362A8519E0672E00999C74 /* SBGestureTableView-Swift */;
+			targetProxy = B5362A9E19E0672E00999C74 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B5362A9119E0672E00999C74 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B5362A9219E0672E00999C74 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B5362A9619E0672E00999C74 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B5362A9719E0672E00999C74 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B5362AA519E0672E00999C74 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B5362AA619E0672E00999C74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B5362AA819E0672E00999C74 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "SBGestureTableView-Swift/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SBGestureTableView-Swift/SBGestureTableView-Swift-Bridging-Header.h";
+			};
+			name = Debug;
+		};
+		B5362AA919E0672E00999C74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "SBGestureTableView-Swift/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SBGestureTableView-Swift/SBGestureTableView-Swift-Bridging-Header.h";
+			};
+			name = Release;
+		};
+		B5362AAB19E0672E00999C74 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "SBGestureTableView-SwiftTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SBGestureTableView-Swift.app/SBGestureTableView-Swift";
+			};
+			name = Debug;
+		};
+		B5362AAC19E0672E00999C74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "SBGestureTableView-SwiftTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SBGestureTableView-Swift.app/SBGestureTableView-Swift";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B5362A8119E0672E00999C74 /* Build configuration list for PBXProject "SBGestureTableView-Swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5362AA519E0672E00999C74 /* Debug */,
+				B5362AA619E0672E00999C74 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B5362AA719E0672E00999C74 /* Build configuration list for PBXNativeTarget "SBGestureTableView-Swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5362AA819E0672E00999C74 /* Debug */,
+				B5362AA919E0672E00999C74 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B5362AAA19E0672E00999C74 /* Build configuration list for PBXNativeTarget "SBGestureTableView-SwiftTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5362AAB19E0672E00999C74 /* Debug */,
+				B5362AAC19E0672E00999C74 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B5362A7E19E0672E00999C74 /* Project object */;
+}
