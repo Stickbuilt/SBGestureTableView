@@ -32,9 +32,9 @@ class SBGestureTableView: UITableView, UIGestureRecognizerDelegate {
         }
         set {
             if (newValue <= 0) {
-                self.longPress.minimumPressDuration = 0.5;
+                longPress.minimumPressDuration = 0.5;
             }
-            self.longPress.minimumPressDuration = newValue;
+            longPress.minimumPressDuration = newValue;
         }
     }
     
@@ -68,7 +68,7 @@ class SBGestureTableView: UITableView, UIGestureRecognizerDelegate {
     
     func indexPathFromGesture(gesture: UIGestureRecognizer) -> NSIndexPath? {
         let location = gesture.locationInView(self)
-        let indexPath = self.indexPathForRowAtPoint(location)
+        let indexPath = indexPathForRowAtPoint(location)
         return indexPath
     }
     
@@ -175,10 +175,10 @@ class SBGestureTableView: UITableView, UIGestureRecognizerDelegate {
             }
                 // we're in the top zone
             else if (location.y <= topScrollBeginning) {
-                self.scrollRate = Double((location.y - topScrollBeginning) / scrollZoneHeight);
+                scrollRate = Double((location.y - topScrollBeginning) / scrollZoneHeight);
             }
             else {
-                self.scrollRate = 0;
+                scrollRate = 0;
             }
         }
             // dropped
@@ -188,8 +188,8 @@ class SBGestureTableView: UITableView, UIGestureRecognizerDelegate {
             let cell = cellForRowAtIndexPath(indexPath)!
             // remove scrolling CADisplayLink
             scrollDisplayLink?.invalidate();
-            self.scrollDisplayLink = nil;
-            self.scrollRate = 0;
+            scrollDisplayLink = nil;
+            scrollRate = 0;
             
             UIView.animateWithDuration(0.3, animations: { () -> Void in
                 let rect = self.rectForRowAtIndexPath(indexPath)
@@ -199,9 +199,9 @@ class SBGestureTableView: UITableView, UIGestureRecognizerDelegate {
                     self.draggingView!.removeFromSuperview()
                     cell.hidden = false
                     let visibleRows: NSArray = self.indexPathsForVisibleRows()!
-                    let mutableRows = visibleRows.mutableCopy() as NSMutableArray
+                    let mutableRows = visibleRows.mutableCopy() as! NSMutableArray
                     mutableRows.removeObject(indexPath)
-                    self.reloadRowsAtIndexPaths(mutableRows, withRowAnimation: UITableViewRowAnimation.None)
+                    self.reloadRowsAtIndexPaths(mutableRows as [AnyObject], withRowAnimation: UITableViewRowAnimation.None)
                     self.currentLocationIndexPath = nil
                     self.draggingView = nil
             })
@@ -211,11 +211,11 @@ class SBGestureTableView: UITableView, UIGestureRecognizerDelegate {
     func updateCurrentLocation(gesture: UILongPressGestureRecognizer) {
         let location = gesture.locationInView(self)
         var indexPath = indexPathForRowAtPoint(location)
-        if let newIndexPath = self.delegate?.tableView?(self, targetIndexPathForMoveFromRowAtIndexPath: initialIndexPath!, toProposedIndexPath: indexPath!) {
+        if let newIndexPath = delegate?.tableView?(self, targetIndexPathForMoveFromRowAtIndexPath: initialIndexPath!, toProposedIndexPath: indexPath!) {
             indexPath = newIndexPath
         }
         if let indexPath = indexPath {
-            let oldHeight = rectForRowAtIndexPath(self.currentLocationIndexPath!).size.height
+            let oldHeight = rectForRowAtIndexPath(currentLocationIndexPath!).size.height
             let newHeight = rectForRowAtIndexPath(indexPath).size.height
             if indexPath != currentLocationIndexPath
                 && gesture.locationInView(cellForRowAtIndexPath(indexPath)).y > newHeight - oldHeight {
@@ -247,16 +247,16 @@ class SBGestureTableView: UITableView, UIGestureRecognizerDelegate {
     }
     
     
-    func removeCell(indexPath: NSIndexPath, duration: NSTimeInterval, completion:(() -> Void)?) {
-        let cell = self.cellForRowAtIndexPath(indexPath)! as SBGestureTableViewCell;
-        self.removeCell(cell, indexPath: indexPath, duration: duration, completion: completion)
+    func removeCellAt(indexPath: NSIndexPath, duration: NSTimeInterval, completion:(() -> Void)?) {
+        let cell = cellForRowAtIndexPath(indexPath)! as! SBGestureTableViewCell;
+        removeCell(cell, indexPath: indexPath, duration: duration, completion: completion)
 
     }
  
     
     func removeCell(cell: SBGestureTableViewCell, duration: NSTimeInterval, completion:(() -> Void)?) {
-        let indexPath = self.indexPathForCell(cell)!
-        self.removeCell(cell, indexPath: indexPath, duration: duration, completion: completion)
+        let indexPath = indexPathForCell(cell)!
+        removeCell(cell, indexPath: indexPath, duration: duration, completion: completion)
     }
 
     private func removeCell(cell: SBGestureTableViewCell, indexPath: NSIndexPath, var duration: NSTimeInterval, completion: (()-> Void)?) {
@@ -309,7 +309,6 @@ class SBGestureTableView: UITableView, UIGestureRecognizerDelegate {
         UIView.animateWithDuration(duration * cell.percentageOffsetFromCenter(), animations: { () -> Void in
             cell.center = CGPointMake(cell.frame.size.width/2 + (cell.frame.origin.x > 0 ? cell.frame.size.width : -cell.frame.size.width), cell.center.y)
             }, completion: {(done) -> Void in
-                var a = 1
                 completion?()
         })
     }
@@ -329,7 +328,6 @@ class SBGestureTableView: UITableView, UIGestureRecognizerDelegate {
 
     func showOrHideBackgroundViewAnimatedly(animatedly: Bool) {
         UIView.animateWithDuration(animatedly ? 0.3 : 0, animations: { () -> Void in
-            var i = 1
             self.backgroundView?.alpha = self.isEmpty() ? 1 : 0
         })
     }

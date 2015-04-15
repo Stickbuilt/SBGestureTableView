@@ -54,7 +54,7 @@ class SBGestureTableViewCell: UITableViewCell, UIGestureRecognizerDelegate {
         }
         set {
             super.center = newValue
-            self.updateSideViews()
+            updateSideViews()
         }
     }
     override var frame: CGRect {
@@ -63,7 +63,7 @@ class SBGestureTableViewCell: UITableViewCell, UIGestureRecognizerDelegate {
         }
         set {
             super.frame = newValue
-            self.updateSideViews()
+            updateSideViews()
         }
     }
     private var gestureTableView: SBGestureTableView!
@@ -75,18 +75,8 @@ class SBGestureTableViewCell: UITableViewCell, UIGestureRecognizerDelegate {
         addGestureRecognizer(panGestureRecognizer)
     }
     
-    override init() {
-        super.init()
-        setup()
-    }
-
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setup()
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
         setup()
     }
     
@@ -115,7 +105,7 @@ class SBGestureTableViewCell: UITableViewCell, UIGestureRecognizerDelegate {
     
     override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer.isKindOfClass(UIPanGestureRecognizer) {
-            let panGestureRecognizer = gestureRecognizer as UIPanGestureRecognizer
+            let panGestureRecognizer = gestureRecognizer as! UIPanGestureRecognizer
             let velocity = panGestureRecognizer.velocityInView(self)
             let horizontalLocation = panGestureRecognizer.locationInView(self).x
             if fabs(velocity.x) > fabs(velocity.y)
@@ -183,11 +173,11 @@ class SBGestureTableViewCell: UITableViewCell, UIGestureRecognizerDelegate {
     }
     
     func hasAnyLeftAction() -> Bool {
-        return self.firstLeftAction != nil || self.secondLeftAction != nil
+        return firstLeftAction != nil || secondLeftAction != nil
     }
 
     func hasAnyRightAction() -> Bool {
-        return self.firstRightAction != nil || self.secondRightAction != nil
+        return firstRightAction != nil || secondRightAction != nil
     }
 
     func setupSideViews() {
