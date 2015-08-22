@@ -68,7 +68,7 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
-            if let indexPath = tableView.indexPathForSelectedRow() {
+            if let indexPath = tableView.indexPathForSelectedRow {
                 let object = objects[indexPath.row] as! NSDate
             (segue.destinationViewController as! DetailViewController).detailItem = object
                 tableView.deselectRowAtIndexPath(indexPath, animated: true)

@@ -9,7 +9,7 @@
 import UIKit
 
 
-class SBGestureTableViewCell: UITableViewCell, UIGestureRecognizerDelegate {
+class SBGestureTableViewCell: UITableViewCell {
 
     var actionIconsFollowSliding = true
     var actionIconsMargin: CGFloat = 20.0
@@ -75,7 +75,7 @@ class SBGestureTableViewCell: UITableViewCell, UIGestureRecognizerDelegate {
         addGestureRecognizer(panGestureRecognizer)
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
     }
