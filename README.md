@@ -57,3 +57,6 @@ SBGestureTableView is based on code written by [David Román](https://github.com
 
 ## License
 SBGestureTableView is copyright 2014 by Stickbuilt Inc. and is available under the MIT license. See the LICENSE file for more information. Attribution isn't required but is much appreciated.
+
+## Others
+Converted to Swift 2.0 syntax by [David Chen](http://github.com/theniceboy)
