@@ -26,7 +26,7 @@ class SBGestureTableView: UITableView, UIGestureRecognizerDelegate {
             longPress.enabled = newValue
         }
     }
-    var minimumLongPressDuration : CFTimeInterval {
+    var minimumLongPressDuration: CFTimeInterval {
         get {
             return longPress.minimumPressDuration;
         }
@@ -61,7 +61,7 @@ class SBGestureTableView: UITableView, UIGestureRecognizerDelegate {
         initialize()
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initialize()
     }
@@ -81,6 +81,7 @@ class SBGestureTableView: UITableView, UIGestureRecognizerDelegate {
         longPress.enabled = true
     }
     
+    // FIXME: Someone get a Karnaugh map in here...
     override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer.isKindOfClass(UILongPressGestureRecognizer) {
             if isEnabled && didMoveCellFromIndexPathToIndexPathBlock != nil {
@@ -102,7 +103,7 @@ class SBGestureTableView: UITableView, UIGestureRecognizerDelegate {
     func longPress(gesture: UILongPressGestureRecognizer) {
         let location = gesture.locationInView(self)
         let indexPath = indexPathForRowAtPoint(location)
-        let sections = numberOfSections()
+        let sections = numberOfSections
         var rows = 0
         for var i = 0; i < sections; i++ {
             rows += numberOfRowsInSection(i)
@@ -120,13 +121,13 @@ class SBGestureTableView: UITableView, UIGestureRecognizerDelegate {
         if gesture.state == UIGestureRecognizerState.Began {
             isEnabled = false
             let cell = cellForRowAtIndexPath(indexPath!)!;
-//            draggingRowHeight = cell.frame.size.height;
+            //draggingRowHeight = cell.frame.size.height;
             cell.setSelected(false, animated: false)
             cell.setHighlighted(false, animated: false)
             
             // make an image from the pressed tableview cell
             UIGraphicsBeginImageContextWithOptions(cell.bounds.size, false, 0)
-            cell.layer.renderInContext(UIGraphicsGetCurrentContext())
+            cell.layer.renderInContext(UIGraphicsGetCurrentContext()!)
             let cellImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
             
@@ -159,7 +160,7 @@ class SBGestureTableView: UITableView, UIGestureRecognizerDelegate {
             scrollDisplayLink = CADisplayLink(target: self, selector: "scrollTableWithCell:")
             scrollDisplayLink?.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSDefaultRunLoopMode)
         }
-            // dragging
+        // dragging
         else if gesture.state == UIGestureRecognizerState.Changed {
             var rect = bounds;
             // adjust rect for content inset as we will use it below for calculating scroll zones
@@ -173,7 +174,7 @@ class SBGestureTableView: UITableView, UIGestureRecognizerDelegate {
             if location.y >= bottomScrollBeginning {
                 scrollRate = Double((location.y - bottomScrollBeginning) / scrollZoneHeight);
             }
-                // we're in the top zone
+            // we're in the top zone
             else if (location.y <= topScrollBeginning) {
                 scrollRate = Double((location.y - topScrollBeginning) / scrollZoneHeight);
             }
@@ -181,7 +182,8 @@ class SBGestureTableView: UITableView, UIGestureRecognizerDelegate {
                 scrollRate = 0;
             }
         }
-            // dropped
+        
+        // dropped
         else if gesture.state == UIGestureRecognizerState.Ended {
             isEnabled = true
             let indexPath: NSIndexPath = currentLocationIndexPath!
@@ -195,15 +197,13 @@ class SBGestureTableView: UITableView, UIGestureRecognizerDelegate {
                 let rect = self.rectForRowAtIndexPath(indexPath)
                 self.draggingView!.transform = CGAffineTransformIdentity
                 self.draggingView!.frame = CGRectOffset(self.draggingView!.bounds, rect.origin.x, rect.origin.y)
-                }, completion: {(Bool) -> Void in
-                    self.draggingView!.removeFromSuperview()
-                    cell.hidden = false
-                    let visibleRows: NSArray = self.indexPathsForVisibleRows()!
-                    let mutableRows = visibleRows.mutableCopy() as! NSMutableArray
-                    mutableRows.removeObject(indexPath)
-                    self.reloadRowsAtIndexPaths(mutableRows as [AnyObject], withRowAnimation: UITableViewRowAnimation.None)
-                    self.currentLocationIndexPath = nil
-                    self.draggingView = nil
+            }, completion: {(Bool) -> Void in
+                self.draggingView!.removeFromSuperview()
+                cell.hidden = false
+                let visibleRows = self.indexPathsForVisibleRows!.filter { $0 != indexPath }
+                self.reloadRowsAtIndexPaths(visibleRows, withRowAnimation: UITableViewRowAnimation.None)
+                self.currentLocationIndexPath = nil
+                self.draggingView = nil
             })
         }
     }
@@ -250,7 +250,6 @@ class SBGestureTableView: UITableView, UIGestureRecognizerDelegate {
     func removeCellAt(indexPath: NSIndexPath, duration: NSTimeInterval, completion:(() -> Void)?) {
         let cell = cellForRowAtIndexPath(indexPath)! as! SBGestureTableViewCell;
         removeCell(cell, indexPath: indexPath, duration: duration, completion: completion)
-
     }
  
     
@@ -265,22 +264,24 @@ class SBGestureTableView: UITableView, UIGestureRecognizerDelegate {
         }
         isEnabled = false
         let animation = cell.frame.origin.x > 0 ? UITableViewRowAnimation.Right : UITableViewRowAnimation.Left
+        
         UIView.animateWithDuration(duration * cell.percentageOffsetFromEnd(), animations: { () -> Void in
-            cell.center = CGPointMake(cell.frame.size.width/2 + (cell.frame.origin.x > 0 ? cell.frame.size.width : -cell.frame.size.width),
-                cell.center.y)
+            let x = cell.frame.size.width/2 + (cell.frame.origin.x > 0 ? cell.frame.size.width : -cell.frame.size.width)
+            let y = cell.center.y
+            cell.center = CGPointMake(x, y)
         }) { (finished) -> Void in
-            UIView.animateWithDuration(duration, animations: { () -> Void in
+            UIView.animateWithDuration(duration) {
                 cell.leftSideView.alpha = 0
                 cell.rightSideView.alpha = 0
-            })
-            self.deleteRowsAtIndexPaths([indexPath], withRowAnimation: animation, duration:duration, completion: { () -> Void in
+            }
+            self.deleteRowsAtIndexPaths([indexPath], withRowAnimation: animation, duration: duration) { () -> Void in
                 cell.leftSideView.alpha = 1
                 cell.rightSideView.alpha = 1
                 cell.leftSideView.removeFromSuperview()
                 cell.rightSideView.removeFromSuperview()
                 self.isEnabled = true
                 completion?()
-            })
+            }
         }
     }
     
@@ -291,34 +292,38 @@ class SBGestureTableView: UITableView, UIGestureRecognizerDelegate {
         bounce = fabs(bounce)
         
         UIView.animateWithDuration(duration * cell.percentageOffsetFromCenter(), animations: { () -> Void in
-            cell.center = CGPointMake(cell.frame.size.width/2 + (cell.frame.origin.x > 0 ? -bounce : bounce), cell.center.y)
+            let x = cell.frame.size.width/2 + (cell.frame.origin.x > 0 ? -bounce : bounce)
+            let y = cell.center.y
+            cell.center = CGPointMake(x, y)
             cell.leftSideView.iconImageView.alpha = 0
             cell.rightSideView.iconImageView.alpha = 0
-            }, completion: {(done) -> Void in
-                UIView.animateWithDuration(duration/2, animations: { () -> Void in
-                    cell.center = CGPointMake(cell.frame.size.width/2, cell.center.y)
-                    }, completion: {(done) -> Void in
-                        cell.leftSideView.removeFromSuperview()
-                        cell.rightSideView.removeFromSuperview()
-                        completion?()
-                })
-        })
+        }) {(done) -> Void in
+            UIView.animateWithDuration(duration/2, animations: { () -> Void in
+                cell.center = CGPointMake(cell.frame.size.width/2, cell.center.y)
+            }) {(done) -> Void in
+                cell.leftSideView.removeFromSuperview()
+                cell.rightSideView.removeFromSuperview()
+                completion?()
+            }
+        }
     }
     
     func fullSwipeCell(cell: SBGestureTableViewCell, duration: NSTimeInterval, completion:(() -> Void)?) {
         UIView.animateWithDuration(duration * cell.percentageOffsetFromCenter(), animations: { () -> Void in
-            cell.center = CGPointMake(cell.frame.size.width/2 + (cell.frame.origin.x > 0 ? cell.frame.size.width : -cell.frame.size.width), cell.center.y)
-            }, completion: {(done) -> Void in
-                completion?()
-        })
+            let x = cell.frame.size.width/2 + (cell.frame.origin.x > 0 ? cell.frame.size.width : -cell.frame.size.width)
+            let y = cell.center.y
+            cell.center = CGPointMake(x, y)
+        }) {(done) -> Void in
+            completion?()
+        }
     }
     
-    private func deleteRowsAtIndexPaths(indexPaths: [AnyObject], withRowAnimation animation: UITableViewRowAnimation, duration: NSTimeInterval, completion:() -> Void) {
+    private func deleteRowsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation, duration: NSTimeInterval, completion:() -> Void) {
         CATransaction.begin()
         CATransaction.setCompletionBlock(completion)
-        UIView.animateWithDuration(duration, animations: { () -> Void in
+        UIView.animateWithDuration(duration) {
             self.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: animation)
-        })
+        }
         CATransaction.commit()
     }
     
@@ -327,25 +332,22 @@ class SBGestureTableView: UITableView, UIGestureRecognizerDelegate {
     }
 
     func showOrHideBackgroundViewAnimatedly(animatedly: Bool) {
-        UIView.animateWithDuration(animatedly ? 0.3 : 0, animations: { () -> Void in
-            self.backgroundView?.alpha = self.isEmpty() ? 1 : 0
-        })
+        UIView.animateWithDuration(animatedly ? 0.3 : 0) {
+            self.backgroundView?.alpha = self.isEmpty ? 1 : 0
+        }
     }
     
-    func isEmpty() -> (Bool) {
+    var isEmpty: Bool {
         if let dataSource = dataSource {
             let numberOfSections = dataSource.numberOfSectionsInTableView!(self)
-            for var i = 0; i < numberOfSections; i++ {
-                let numberOfRowsInSection = dataSource.tableView(self, numberOfRowsInSection: i)
-                if numberOfRowsInSection > 0 {
-                    return false
-                }
-            }
+            return (0..<numberOfSections).map {
+                dataSource.tableView(self, numberOfRowsInSection: $0)
+            }.filter { $0 > 0 }.isEmpty
         }
         return true
     }
 
-    override func insertRowsAtIndexPaths(indexPaths: [AnyObject], withRowAnimation animation: UITableViewRowAnimation) {
+    override func insertRowsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
         super.insertRowsAtIndexPaths(indexPaths, withRowAnimation: animation)
         showOrHideBackgroundViewAnimatedly(true)
     }
@@ -355,7 +357,7 @@ class SBGestureTableView: UITableView, UIGestureRecognizerDelegate {
         showOrHideBackgroundViewAnimatedly(true)
     }
 
-    override func deleteRowsAtIndexPaths(indexPaths: [AnyObject], withRowAnimation animation: UITableViewRowAnimation) {
+    override func deleteRowsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
         super.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: animation)
         showOrHideBackgroundViewAnimatedly(true)
     }

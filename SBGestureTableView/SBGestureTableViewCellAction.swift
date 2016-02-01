@@ -10,9 +10,9 @@ import UIKit
 
 class SBGestureTableViewCellAction: NSObject {
     
-    var icon : UIImage
-    var color : UIColor
-    var fraction : CGFloat
+    var icon: UIImage
+    var color: UIColor
+    var fraction: CGFloat
     var didTriggerBlock: ((SBGestureTableView, SBGestureTableViewCell) -> (Void))
     var didHighlightBlock: ((SBGestureTableView, SBGestureTableViewCell) -> (Void))?
     var didUnhighlightBlock: ((SBGestureTableView, SBGestureTableViewCell) -> (Void))?
