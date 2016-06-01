@@ -212,6 +212,7 @@ class SBGestureTableViewCell: UITableViewCell {
     
     func closeSlide() {
         leftSideView.iconImageView.alpha = 0.0
+        rightSideView.iconImageView.alpha = 0.0
         gestureTableView.reloadData()
     }
     
