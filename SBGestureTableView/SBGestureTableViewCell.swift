@@ -10,43 +10,41 @@ import UIKit
 
 
 class SBGestureTableViewCell: UITableViewCell {
-
+    
     var actionIconsFollowSliding = true
     var actionIconsMargin: CGFloat = 20.0
     var actionNormalColor = UIColor(white: 0.85, alpha: 1)
-
+    
     
     var leftSideView = SBGestureTableViewCellSideView()
     var rightSideView = SBGestureTableViewCellSideView()
     
-    var firstLeftAction: SBGestureTableViewCellAction? {
+    private var leftActionFractions = [Double]()
+    var leftActions: [SBGestureTableViewCellAction] = [SBGestureTableViewCellAction]() {
         didSet {
-            if (firstLeftAction?.fraction == 0) {
-                firstLeftAction?.fraction = 0.3
+            leftActions = leftActions.sort { (a1: SBGestureTableViewCellAction, a2: SBGestureTableViewCellAction) -> Bool in
+                return a1.fraction < a2.fraction
             }
+            
+            leftActionFractions = leftActions.map({ (action) -> Double in
+                return Double(action.fraction)
+            }) + [1.0]
         }
     }
-    var secondLeftAction: SBGestureTableViewCellAction? {
+    
+    private var rightActionFractions = [Double]()
+    var rightActions: [SBGestureTableViewCellAction] = [SBGestureTableViewCellAction]() {
         didSet {
-            if (secondLeftAction?.fraction == 0) {
-                secondLeftAction?.fraction = 0.7
+            rightActions = rightActions.sort { (a1: SBGestureTableViewCellAction, a2: SBGestureTableViewCellAction) -> Bool in
+                return a1.fraction < a2.fraction
             }
+            
+            rightActionFractions = rightActions.map({ (action) -> Double in
+                return Double(action.fraction)
+            }) + [1.0]
         }
     }
-    var firstRightAction: SBGestureTableViewCellAction? {
-        didSet {
-            if (firstRightAction?.fraction == 0) {
-                firstRightAction?.fraction = 0.3
-            }
-        }
-    }
-    var secondRightAction: SBGestureTableViewCellAction? {
-        didSet {
-            if (secondRightAction?.fraction == 0) {
-                secondRightAction?.fraction = 0.7
-            }
-        }
-    }
+    
     var currentAction: SBGestureTableViewCellAction?
     override var center: CGPoint {
         get {
@@ -70,7 +68,7 @@ class SBGestureTableViewCell: UITableViewCell {
     private let panGestureRecognizer = UIPanGestureRecognizer()
     
     func setup() {
-        panGestureRecognizer.addTarget(self, action: "slideCell:")
+        panGestureRecognizer.addTarget(self, action: #selector(self.slideCell(_:)))
         panGestureRecognizer.delegate = self
         addGestureRecognizer(panGestureRecognizer)
     }
@@ -112,7 +110,7 @@ class SBGestureTableViewCell: UITableViewCell {
                 && horizontalLocation > CGFloat(gestureTableView.edgeSlidingMargin)
                 && horizontalLocation < frame.size.width - CGFloat(gestureTableView.edgeSlidingMargin)
                 && gestureTableView.isEnabled {
-                    return true;
+                return true;
             }
         } else if gestureRecognizer.isKindOfClass(UILongPressGestureRecognizer) {
             if gestureTableView.didMoveCellFromIndexPathToIndexPathBlock == nil {
@@ -124,19 +122,20 @@ class SBGestureTableViewCell: UITableViewCell {
     
     func actionForCurrentPosition() -> SBGestureTableViewCellAction? {
         let fraction = fabs(frame.origin.x/frame.size.width)
-        if frame.origin.x > 0 {
-            if secondLeftAction != nil && fraction > secondLeftAction!.fraction {
-                return secondLeftAction!
-            } else if firstLeftAction != nil && fraction > firstLeftAction!.fraction {
-                return firstLeftAction!
-            }
-        } else if frame.origin.x < 0 {
-            if secondRightAction != nil && fraction > secondRightAction!.fraction {
-                return secondRightAction!
-            } else if firstRightAction != nil && fraction > firstRightAction!.fraction {
-                return firstRightAction!
+        
+        let isLeftSlide = frame.origin.x > 0
+        let actionsMap = isLeftSlide ? leftActionFractions : rightActionFractions
+        let actions = isLeftSlide ? leftActions : rightActions
+        
+        for (index, actionFraction) in actionsMap.enumerate() {
+            if actionFraction > Double(fraction) {
+                if index == 0 {
+                    return nil
+                }
+                return actions[index-1]
             }
         }
+        
         return nil
     }
     
@@ -153,10 +152,10 @@ class SBGestureTableViewCell: UITableViewCell {
         } else {
             if frame.origin.x > 0 {
                 leftSideView.backgroundColor = actionNormalColor
-                leftSideView.iconImageView.image = firstLeftAction!.icon
+                leftSideView.iconImageView.image = leftActions.first?.icon
             } else if frame.origin.x < 0 {
                 rightSideView.backgroundColor = actionNormalColor
-                rightSideView.iconImageView.image = firstRightAction!.icon
+                rightSideView.iconImageView.image = rightActions.first?.icon
             }
         }
         if let image = leftSideView.iconImageView.image {
@@ -173,22 +172,22 @@ class SBGestureTableViewCell: UITableViewCell {
     }
     
     func hasAnyLeftAction() -> Bool {
-        return firstLeftAction != nil || secondLeftAction != nil
+        return leftActions.count > 0
     }
-
+    
     func hasAnyRightAction() -> Bool {
-        return firstRightAction != nil || secondRightAction != nil
+        return rightActions.count > 0
     }
-
+    
     func setupSideViews() {
         leftSideView.iconImageView.contentMode = actionIconsFollowSliding ? UIViewContentMode.Right : UIViewContentMode.Left
         rightSideView.iconImageView.contentMode = actionIconsFollowSliding ? UIViewContentMode.Left : UIViewContentMode.Right
         superview?.insertSubview(leftSideView, atIndex: 0)
         superview?.insertSubview(rightSideView, atIndex: 0)
     }
-
+    
     func slideCell(panGestureRecognizer: UIPanGestureRecognizer) {
-        if !hasAnyLeftAction() || !hasAnyRightAction() {
+        if !hasAnyLeftAction() && !hasAnyRightAction() {
             return
         }
         var horizontalTranslation = panGestureRecognizer.translationInView(self).x
@@ -197,7 +196,7 @@ class SBGestureTableViewCell: UITableViewCell {
         } else if panGestureRecognizer.state == UIGestureRecognizerState.Changed {
             if (!hasAnyLeftAction() && frame.size.width/2 + horizontalTranslation > frame.size.width/2)
                 || (!hasAnyRightAction() && frame.size.width/2 + horizontalTranslation < frame.size.width/2) {
-                    horizontalTranslation = 0
+                horizontalTranslation = 0
             }
             performChanges()
             center = CGPointMake(frame.size.width/2 + horizontalTranslation, center.y)
@@ -209,6 +208,12 @@ class SBGestureTableViewCell: UITableViewCell {
             }
             currentAction = nil
         }
+    }
+    
+    func closeSlide() {
+        leftSideView.iconImageView.alpha = 0.0
+        rightSideView.iconImageView.alpha = 0.0
+        gestureTableView.reloadData()
     }
     
     func updateSideViews() {
