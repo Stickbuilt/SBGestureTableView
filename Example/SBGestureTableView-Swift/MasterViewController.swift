@@ -10,7 +10,7 @@ import UIKit
 
 class MasterViewController: UIViewController {
 
-    var objects = [String]()
+    var objects = [(value: String, leftActionsEnabled: Bool)]()
 
     @IBOutlet weak var tableView: SBGestureTableView!
     
@@ -43,6 +43,7 @@ class MasterViewController: UIViewController {
             swap(&self.objects[toIndexPath.row], &self.objects[fromIndexPath.row])
         }
         
+        
         removeCellBlock = {(tableView: SBGestureTableView, cell: SBGestureTableViewCell) -> Void in
             if let indexPath = tableView.indexPathForCell(cell) {
                 self.objects.removeAtIndex(indexPath.row)
@@ -71,7 +72,7 @@ class MasterViewController: UIViewController {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let object = objects[indexPath.row]
-                (segue.destinationViewController as! DetailViewController).detailItem = object
+                (segue.destinationViewController as! DetailViewController).detailItem = object.value
                 tableView.deselectRowAtIndexPath(indexPath, animated: true)
             }
         }
@@ -89,48 +90,33 @@ extension MasterViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let size = CGSizeMake(30, 30)
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! SBGestureTableViewCell
-        
-        cell.leftActions = [SBGestureTableViewCellAction(icon: checkIcon.imageWithSize(size), color: greenColor, fraction: 0.3, didTriggerBlock: removeCellBlock),
-                            SBGestureTableViewCellAction(icon: closeIcon.imageWithSize(size), color: redColor, fraction: 0.6, didTriggerBlock: removeCellBlock)]
-        
-        
-        let calendarAction = SBGestureTableViewCellAction(icon: composeIcon.imageWithSize(size), color: yellowColor, fraction: 0.2, didTriggerBlock: showTime(editable: true))
-        let clockAction = SBGestureTableViewCellAction(icon: clockIcon.imageWithSize(size), color: orangeColor, fraction: 0.3, didTriggerBlock: showTime())
-        let helpAction = SBGestureTableViewCellAction(icon: helpIcon.imageWithSize(size), color: brownColor, fraction: 0.4) { (tableView, cell) in
-            let alert = UIAlertController(title: "This is a quick demo", message: nil, preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { action in
-                // swipe cell back
-            }))
-            cell.closeSlide()
-            self.presentViewController(alert, animated: true, completion: nil)
-        }
-        
-        cell.rightActions = [calendarAction, clockAction, helpAction]
-        
-        let object = objects[indexPath.row]
-        cell.textLabel!.text = object
+
         return cell
     }
-    
+
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = cell as! SBGestureTableViewCell
+        setupCell(cell, atIndexPath: indexPath)
+    }
     
 
 }
 
+
+
 // MARK: - Helpers
 extension MasterViewController {
     
-    //
-    
     func insertNewObject(sender: AnyObject) {
-        objects.insert(NSDate().description, atIndex: 0)
-        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+        let indexPath = NSIndexPath(forRow: objects.endIndex, inSection: 0)
+        objects.append((value: NSDate().description, leftActionsEnabled: random()%2 == 0))
+        
         tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+        
     }
     
     // Alerts
-    
     
     func showTime(editable editable: Bool = false) -> ((SBGestureTableView, SBGestureTableViewCell) -> Void) {
         
@@ -139,7 +125,7 @@ extension MasterViewController {
                 return
             }
             
-            let alert = UIAlertController(title: "Showing the selected item", message: editable ? "Change the date" : "The Date is: \(self.objects[indexPath.row])", preferredStyle: .Alert)
+            let alert = UIAlertController(title: "Showing the selected item", message: editable ? "Change the date" : "The Date is: \(self.objects[indexPath.row].value)", preferredStyle: .Alert)
             
             
             cell.closeSlide()
@@ -150,15 +136,16 @@ extension MasterViewController {
                     
                     if let textFields = alert.textFields,
                         let textField = textFields.first,
-                        let newText = textField.text where editable == true {
+                        let text = textField.text where editable == true {
                         
-                        self.objects[indexPath.row] = newText
+                        self.objects[indexPath.row].value = text
                     }
                     
+                    self.setupCell(cell, atIndexPath: indexPath)
                 }))
                 
                 alert.addTextFieldWithConfigurationHandler({ (textField) in
-                    textField.text = self.objects[indexPath.row]
+                    textField.text = self.objects[indexPath.row].value
                 })
                 
             } else {
@@ -167,5 +154,52 @@ extension MasterViewController {
             
             self.presentViewController(alert, animated: true, completion: nil)
         }
+    }
+    
+    func setupCell(cell: SBGestureTableViewCell, atIndexPath indexPath: NSIndexPath) {
+        
+        let size = CGSizeMake(30, 30)
+        let object = objects[indexPath.row]
+        
+        //
+        // Left Actions
+        //
+        
+        if object.leftActionsEnabled {
+            let acceptAction = SBGestureTableViewCellAction(icon: checkIcon.imageWithSize(size), color: greenColor, fraction: 0.3) { (tableView, cell) in
+                self.objects[indexPath.row].leftActionsEnabled = false
+                cell.closeSlide()
+            }
+            
+            cell.leftActions = [acceptAction, SBGestureTableViewCellAction(icon: closeIcon.imageWithSize(size), color: redColor, fraction: 0.6, didTriggerBlock: removeCellBlock)]
+            cell.textLabel?.textColor = UIColor.blackColor()
+            
+        } else {
+            cell.leftActions = []
+            cell.textLabel?.textColor = redColor
+        }
+        
+        
+        //
+        // Right Actions
+        //
+        
+        let calendarAction = SBGestureTableViewCellAction(icon: composeIcon.imageWithSize(size), color: yellowColor, fraction: 0.2, didTriggerBlock: showTime(editable: true))
+        let clockAction = SBGestureTableViewCellAction(icon: clockIcon.imageWithSize(size), color: orangeColor, fraction: 0.3, didTriggerBlock: showTime())
+        let helpAction = SBGestureTableViewCellAction(icon: helpIcon.imageWithSize(size), color: brownColor, fraction: 0.4) { (tableView, cell) in
+            let alert = UIAlertController(title: "This is a quick demo", message: nil, preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            cell.closeSlide()
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        
+        cell.rightActions = [calendarAction, clockAction, helpAction]
+        
+        //
+        // Text
+        //
+        
+        cell.textLabel!.text = object.value
+        
     }
 }

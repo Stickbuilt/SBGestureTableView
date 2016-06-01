@@ -187,7 +187,7 @@ class SBGestureTableViewCell: UITableViewCell {
     }
     
     func slideCell(panGestureRecognizer: UIPanGestureRecognizer) {
-        if !hasAnyLeftAction() || !hasAnyRightAction() {
+        if !hasAnyLeftAction() && !hasAnyRightAction() {
             return
         }
         var horizontalTranslation = panGestureRecognizer.translationInView(self).x
